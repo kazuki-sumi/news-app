@@ -3,14 +3,13 @@ module Admin
     skip_before_action :authorize_admin_user
     layout "login"
 
-    def new
-    end
+    def new; end
 
     def create
       @user = User.find_by(email: params[:password_reset][:email])
       if @user
         @user.create_reset_password_token
-        Admin::UserMailer.password_reset(@user, @user.reset_password_token).deliver_later(wait: 10.second)
+        Admin::UserMailer.password_reset(@user, @user.reset_password_token).deliver_later(wait: 10.seconds)
         redirect_to admin_login_path, notice: "パスワードをリセットするためのメールを送りました"
       else
         flash.now[:danger] = "入力いただいたメールアドレスは見つかりませんでした"
@@ -26,7 +25,6 @@ module Admin
       end
       unless @user && @user.authenticated?(:reset_password_token, params[:id])
         redirect_to admin_login_path, notice: "ユーザの認証に失敗しました"
-        return
       end
     end
 
@@ -43,7 +41,7 @@ module Admin
       if params[:user][:password].empty?
         @user.errors.add(:password, :blank)
         render :edit
-      elsif @user.update_attributes(user_params)
+      elsif @user.update(user_params)
         log_in @user
         redirect_to admin_path, notice: "パスワードをリセットしました"
       else
