@@ -1,6 +1,6 @@
 .upload-file
   .file-content.mb-5
-    - if is_image?(@article_file)
+    - if image?(@article_file)
       .file = image_tag(@article_file.file_url.url, :size => "500x400")
     - elsif @article_file.file_type.include?("pdf")
       p pdfファイル
@@ -13,7 +13,7 @@
         li.list-unstyled = "メディア名：#{@article_file.file_url.identifier}"
         li.list-unstyled = "ファイルタイプ：#{@article_file.file_type}"
         li.list-unstyled = "ファイルサイズ：#{@article_file.file_size/1000.to_f} KB"
-        - if is_image?(@article_file)
+        - if image?(@article_file)
           li.list-unstyled = "サイズ(縦 × 横)：#{@article_file.data["height"]} × #{@article_file.data["width"]}"
       .card-footer
         = link_to "ファイルの編集", edit_admin_article_file_path(@article_file), class: "btn btn-primary mr-3"

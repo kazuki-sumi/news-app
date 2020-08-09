@@ -10,17 +10,19 @@ class Admin::BaseController < ApplicationController
     rescue_from ActionController::RoutingError, with: :render_404
   end
 
-  def render_404(e = nil)
-    logger.error "Rendering 404 with exception: #{e.class.name} (#{e.message})" if e
-    render file: Rails.root.join("public/errors/admin/404.html"), status: :not_found, layout: false, content_type: 'text/html', formats: [:html]
+  def render_404(exception = nil)
+    logger.error "Rendering 404 with exception: #{exception.class.name} (#{exception.message})" if exception
+    render file: Rails.root.join("public/errors/admin/404.html"),
+      status: :not_found, layout: false, content_type: 'text/html', formats: [:html]
   end
 
-  def render_500(e = nil)
-    if e
-      logger.error "Rendering 500 with exception: #{e.class.name} (#{e.message})"
-      logger.error e.backtrace.join("\n")
+  def render_500(exception = nil)
+    if exception
+      logger.error "Rendering 500 with exception: #{exception.class.name} (#{exception.message})"
+      logger.error exception.backtrace.join("\n")
     end
-    render file: Rails.root.join("public/errors/admin/500.html"), status: :internal_server_error, layout: false, content_type: 'text/html', formats: [:html]
+    render file: Rails.root.join("public/errors/admin/500.html"),
+      status: :internal_server_error, layout: false, content_type: 'text/html', formats: [:html]
   end
 
   private

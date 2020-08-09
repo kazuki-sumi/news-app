@@ -29,7 +29,7 @@
       .col.mb-3
         .file-card.card.h-100
           .card-body
-            - if is_image?(article_file)
+            - if image?(article_file)
               = link_to admin_article_file_path(article_file), class: "file-link" do
                 .file = image_tag(article_file.file_url.url, class: "w-100 img-responsive")
                 .file-name.text-body = article_file.name

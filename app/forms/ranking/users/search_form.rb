@@ -15,7 +15,7 @@ module Ranking
         model = find_term_model
         summaries = model.top_pv_summaries(date) if @path.include?("/pv")
         summaries = model.top_comment_summaries(date) if @path.include?("/comment")
-        summaries.map { |summary| summary.user }
+        summaries.map(&:user)
       end
 
       private

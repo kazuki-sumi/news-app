@@ -12,7 +12,7 @@ module Articles
       articles = Article.includes(:category).released_articles
       articles = articles.where(category_id: category_id) if category_id.present?
       articles = articles.where('title LIKE ?', "%#{title}%") if title.present?
-      articles = articles.order(created_at: :desc).page(page)
+      articles.order(created_at: :desc).page(page)
     end
   end
 end

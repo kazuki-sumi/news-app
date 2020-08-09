@@ -8,8 +8,8 @@ module Admin
         @title = args[:title]
         @status = args[:status]
         @category_id = args[:category_id]
-        args["min_released_at(1i)"].present? ? @min_released_at = convert_min_released_at(args) : @min_released_at = nil
-        args["max_released_at(1i)"].present? ? @max_released_at = convert_max_released_at(args) : @max_released_at = nil
+        @min_released_at = args["min_released_at(1i)"].present? ? convert_min_released_at(args) : nil
+        @max_released_at = args["max_released_at(1i)"].present? ? convert_max_released_at(args) : nil
       end
 
       def search(page)

@@ -25,7 +25,7 @@ module Ranking
         else
           summaries = model.top_pv_summaries(date).limit(10) if @path.include?("/pv")
           summaries = model.top_comment_summaries(date).limit(10) if @path.include?("/comment")
-          summaries.map { |summary| summary.article }
+          summaries.map(&:article)
         end
       end
 

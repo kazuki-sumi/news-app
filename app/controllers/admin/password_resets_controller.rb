@@ -23,7 +23,7 @@ module Admin
         redirect_to new_admin_password_reset_path, notice: "変更リンクの有効期限がきれています"
         return
       end
-      unless @user && @user.authenticated?(:reset_password_token, params[:id])
+      unless @user && @user&.authenticated?(:reset_password_token, params[:id])
         redirect_to admin_login_path, notice: "ユーザの認証に失敗しました"
       end
     end
@@ -34,7 +34,7 @@ module Admin
         redirect_to new_admin_password_reset_path, notice: "変更リンクの有効期限がきれています"
         return
       end
-      unless @user && @user.authenticated?(:reset_password_token, params[:id])
+      unless @user && @user&.authenticated?(:reset_password_token, params[:id])
         redirect_to admin_login_path, notice: "ユーザの認証に失敗しました"
         return
       end
