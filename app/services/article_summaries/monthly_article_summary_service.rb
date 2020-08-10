@@ -2,9 +2,10 @@ module ArticleSummaries
   class MonthlyArticleSummaryService
     # 記事毎のpv数とコメント数を月間で集計する
     def execute
-      date = Date.today
+      date = Time.zone.today
       article_ids = DailyArticleSummary.where(date: date.ago(1.month)..date.yesterday).distinct.pluck(:article_id)
-      total_comments = DailyArticleSummary.where(date: date.ago(1.month)..date.yesterday).group(:article_id).sum(:comment_count)
+      total_comments = DailyArticleSummary.where(date: date.ago(1.month)..date.yesterday).
+                       group(:article_id).sum(:comment_count)
       total_pvs = DailyArticleSummary.where(date: date.ago(1.month)..date.yesterday).group(:article_id).sum(:pv_count)
       monthly_article_summaries = []
       article_ids.each do |article_id|

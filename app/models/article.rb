@@ -3,7 +3,7 @@ class Article < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100 }
   validates :content, presence: true
   validates :slug, presence: true, uniqueness: true
-  has_many :article_histories
+  has_many :article_histories, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :daily_article_summaries, dependent: :destroy
   has_many :weekly_article_summaries, dependent: :destroy

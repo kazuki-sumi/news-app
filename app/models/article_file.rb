@@ -6,13 +6,13 @@ class ArticleFile < ApplicationRecord
   mount_uploader :file_url, ArticleFileUploader
 
   def set_file_info
-    self.file_type = File.extname(self.file_url.identifier)
-    self.file_size = self.file_url.size
-    if Rails.env.production?
-      image = MiniMagick::Image.open(self.file_url.url)
-    else
-      image = MiniMagick::Image.open(self.file_url.path)
-    end
+    self.file_type = File.extname(file_url.identifier)
+    self.file_size = file_url.size
+    image = if Rails.env.production?
+              MiniMagick::Image.open(file_url.url)
+            else
+              MiniMagick::Image.open(file_url.path)
+            end
     if image.valid?
       self.data = { "width": image[:width], "height": image[:height] }
     end

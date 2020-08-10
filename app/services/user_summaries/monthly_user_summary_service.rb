@@ -1,7 +1,7 @@
 module UserSummaries
   class MonthlyUserSummaryService
     def execute
-      date = Date.today
+      date = Time.zone.today
       from = date.ago(30.days)
       to = date.yesterday
       users = User.where(role: "admin")
@@ -9,6 +9,7 @@ module UserSummaries
       users.each do |user|
         daily_user_summaries = DailyUserSummary.where(date: from..to).where(user_id: user)
         next if daily_user_summaries.blank?
+
         pv_count = 0
         comment_count = 0
         daily_user_summaries.each do |daily_user_summary|

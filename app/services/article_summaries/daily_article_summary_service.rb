@@ -5,8 +5,8 @@ module ArticleSummaries
       date = Date.yesterday
       from = date.beginning_of_day
       to = date.end_of_day
-      articles = Article.where(status: "release").where('released_at <= ?', to)
-                        .or(Article.where(status: "draft").where('released_at <= ?', to))
+      articles = Article.where(status: "release").where('released_at <= ?', to).
+                 or(Article.where(status: "draft").where('released_at <= ?', to))
       summaries = []
       articles.each do |article|
         summary = article.daily_article_summaries.build
@@ -18,7 +18,7 @@ module ArticleSummaries
       end
       ActiveRecord::Base.transaction do
         DailyArticleSummary.import summaries
-        articles.update_all(pv_count: 0)
+        articles.update!(pv_count: 0)
       end
     end
   end
