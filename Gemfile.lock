@@ -139,6 +139,7 @@ GEM
       activesupport (>= 3.2)
     erubi (1.9.0)
     excon (0.73.0)
+    fabrication (2.21.1)
     ffi (1.12.2)
     fog-aws (3.6.5)
       fog-core (~> 2.1)
@@ -388,6 +389,7 @@ DEPENDENCIES
   carrierwave
   config
   enumerize
+  fabrication
   fog-aws
   html2slim
   jbuilder (~> 2.7)
