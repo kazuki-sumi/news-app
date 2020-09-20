@@ -16,7 +16,6 @@ module Ranking
         date_to = Date.yesterday
         date_from = start_day
         category = Category.find_by(name: @category)
-        binding.pry
         summaries = if @path.include?("/pv")
                       DailyArticleSummary.includes(:article).where(date: date_from..date_to).group(:article_id).
                         select(:article_id, "sum(pv_count) as pv_count")
