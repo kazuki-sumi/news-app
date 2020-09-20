@@ -35,7 +35,7 @@
     - @articles.each do |article|
       .col.mb-3
         .card.h-100
-          - if article.category.nil?
+          - if article&.category.nil?
             = link_to article_path(article.slug, article_id: article.id), class: "news-link" do
               .news-image = image_tag(article.image_url.to_s)
               .card-body
