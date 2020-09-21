@@ -30,7 +30,10 @@
         = link_to "月間", ranking_comment_path(category_name: params[:category_name], term: "monthly"), class: "dropdown-item"
 .news-container.col-md-5.mx-auto.pb-5
   - @categories.each do |category|
-    = link_to category.name, ranking_comment_path(category_name: category.name, term: params[:term])
+    - if params[:path].include?("/comment")
+      = link_to category.name, ranking_comment_path(category_name: category.name, term: params[:term])
+    - elsif params[:path].include?("/pv")
+      = link_to category.name, ranking_path(category_name: category.name, term: params[:term])
   .row.row-cols-1
     - @articles.each do |article|
       .col.mb-3
