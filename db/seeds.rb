@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+date = Time.zone.now
 
 10.times do |t|
   User.create(
@@ -38,9 +39,9 @@ Category.create(name: "プログラミング")
     content: "テスト本文",
     slug: "test#{t}",
     status: 1,
-    released_at: Time.zone.now.tomorrow,
-    created_at: Time.zone.now,
-    updated_at: Time.zone.now
+    released_at: date.tomorrow,
+    created_at: date,
+    updated_at: date
   )
 end
 
@@ -53,9 +54,9 @@ end
     slug: "program#{t}",
     status: 1,
     pv_count: rand(0..1000),
-    released_at: Time.zone.now.prev_month(3) - 1.days,
-    created_at:  Time.zone.now.prev_month(3),
-    updated_at: Time.zone.now.prev_month(3)
+    released_at: date.prev_month(3) - 1.days,
+    created_at:  date.prev_month(3),
+    updated_at: date.prev_month(3)
   )
 end
 
@@ -71,34 +72,60 @@ end
 end
 
 30.times do |time|
-  50.times do |t|
-    Comment.create(
-      article_id: rand(21..40),
-      comment: "コメント",
-      created_at:  Time.zone.now.prev_month(3) + time.day,
-      updated_at: Time.zone.now.prev_month(3) + time.day
-    )
+  comments = []
+  500.times do |t|
+    comment = Comment.new(
+                article_id: rand(21..40),
+                comment: "コメント",
+                created_at:  date.prev_month(3) + time.day,
+                updated_at: date.prev_month(3) + time.day
+              )
+    comments << comment
   end
+  Comment.import comments
 end
 
 30.times do |time|
-  50.times do |t|
-    Comment.create(
-      article_id: rand(21..40),
-      comment: "コメント",
-      created_at:  Time.zone.now.prev_month(2) + time.day,
-      updated_at: Time.zone.now.prev_month(2) + time.day
-    )
+  comments = []
+  500.times do |t|
+    comment = Comment.new(
+                article_id: rand(21..40),
+                comment: "コメント",
+                created_at:  date.prev_month(2) + time.day,
+                updated_at: date.prev_month(2) + time.day
+              )
+    comments << comment
   end
+  Comment.import comments
 end
 
 30.times do |time|
-  50.times do |t|
-    Comment.create(
-      article_id: rand(21..40),
-      comment: "コメント",
-      created_at:  Time.zone.now.prev_month(1) + time.day,
-      updated_at: Time.zone.now.prev_month(1) + time.day
+  comments = []
+  500.times do |t|
+    comment = Comment.new(
+                article_id: rand(21..40),
+                comment: "コメント",
+                created_at:  date.prev_month(1) + time.day,
+                updated_at: date.prev_month(1) + time.day
+              )
+    comments << comment
+  end
+  Comment.import comments
+end
+
+30.times do |t|
+  20.times do |time|
+    time += 21
+    from = date.prev_month(3).beginning_of_day + (t + 1).day
+    to = date.prev_month(3).end_of_day + (t + 1).day
+    comments = Comment.where(article_id: time).where(created_at: from..to)
+    DailyArticleSummary.create(
+      article_id: time,
+      pv_count: rand(1..1000),
+      comment_count: comments.size,
+      date: Date.today.prev_month(3) + (t + 1).day,
+      created_at: date.prev_month(3) + (t + 2).day,
+      updated_at: date.prev_month(3) + (t + 2).day
     )
   end
 end
@@ -106,42 +133,33 @@ end
 30.times do |t|
   20.times do |time|
     time += 21
-    comments = Comment.where(article_id: time).where(created_at: Time.zone.now.prev_month(3) + t.day)
-    DailyArticleSummary.create(
-      article_id: time,
-      pv_count: rand(1..1000),
-      comment_count: comments.size,
-      date: Date.today.prev_month(3) + (t + 1).day,
-      created_at: Time.zone.now.prev_month(3) + (t + 2).day,
-      updated_at: Time.zone.now.prev_month(3) + (t + 2).day
-    )
-  end
-end
-
-30.times do |t|
-  20.times do |time|
-    comments = Comment.where(article_id: time).where(created_at: Time.zone.now.prev_month(2) + t.day)
+    from = date.prev_month(3).beginning_of_day + (t + 1).day
+    to = date.prev_month(3).end_of_day + (t + 1).day
+    comments = Comment.where(article_id: time).where(created_at: from..to)
     DailyArticleSummary.create(
       article_id: time,
       pv_count: rand(1..1000),
       comment_count: comments.size,
       date: Date.today.prev_month(2) + (t + 1).day,
-      created_at: Time.zone.now.prev_month(2) + (t + 2).day,
-      updated_at: Time.zone.now.prev_month(2) + (t + 2).day
+      created_at: date.prev_month(2) + (t + 2).day,
+      updated_at: date.prev_month(2) + (t + 2).day
     )
   end
 end
 
 30.times do |t|
   20.times do |time|
-    comments = Comment.where(article_id: time).where(created_at: Time.zone.now.prev_month(1) + t.day)
+    time += 21
+    from = date.prev_month(3).beginning_of_day + (t + 1).day
+    to = date.prev_month(3).end_of_day + (t + 1).day
+    comments = Comment.where(article_id: time).where(created_at: from..to)
     DailyArticleSummary.create(
       article_id: time,
       pv_count: rand(1..1000),
       comment_count: comments.size,
       date: Date.today.prev_month(1) + (t + 1).day,
-      created_at: Time.zone.now.prev_month(1) + (t + 2).day,
-      updated_at: Time.zone.now.prev_month(1) + (t + 2).day
+      created_at: date.prev_month(1) + (t + 2).day,
+      updated_at: date.prev_month(1) + (t + 2).day
     )
   end
 end

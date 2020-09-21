@@ -36,5 +36,5 @@ pidfile ENV.fetch("PIDFILE") { "#{File.expand_path("../..", __FILE__)}/tmp/pids/
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-bind "unix:///var/run/puma.sock"
-directory "#{File.expand_path("../..", __FILE__)}"
+# bind "unix:///var/run/puma.sock"
+# directory "#{File.expand_path("../..", __FILE__)}"
