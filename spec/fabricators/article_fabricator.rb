@@ -5,6 +5,6 @@ Fabricator(:article) do
   content "テストコメント"
   slug "test"
   status 1
-  released_at  Time.zone.now
+  released_at Time.zone.now
   pv_count { rand(1..1000) }
 end
