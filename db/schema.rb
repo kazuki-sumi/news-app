@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_125045) do
+ActiveRecord::Schema.define(version: 2020_09_22_020718) do
+
   create_table "article_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.string "slug", limit: 100, null: false
@@ -92,17 +93,6 @@ ActiveRecord::Schema.define(version: 2020_05_07_125045) do
     t.index ["user_id"], name: "index_daily_user_summaries_on_user_id"
   end
 
-  create_table "monthly_article_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "article_id", null: false
-    t.integer "pv_count", default: 0, null: false
-    t.integer "comment_count", default: 0, null: false
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_monthly_article_summaries_on_article_id"
-  end
-
   create_table "monthly_user_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "pv_count", default: 0, null: false
@@ -127,17 +117,6 @@ ActiveRecord::Schema.define(version: 2020_05_07_125045) do
     t.datetime "reset_password_sent_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
-  create_table "weekly_article_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "article_id", null: false
-    t.integer "pv_count", default: 0, null: false
-    t.integer "comment_count", default: 0, null: false
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_weekly_article_summaries_on_article_id"
   end
 
   create_table "weekly_user_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
