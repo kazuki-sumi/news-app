@@ -1,0 +1,2 @@
+Fabricator(:operator) do
+end
