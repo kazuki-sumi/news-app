@@ -25,6 +25,24 @@ end
   )
 end
 
+10.times do |t|
+  Operator.create(
+    email: "test#{t}@example.com",
+    password: "password",
+    password_confirmation: "password",
+    role: 1
+  )
+end
+
+10.times do |t|
+  Operator.create(
+    email: "sample#{t}@example.com",
+    password: "password",
+    password_confirmation: "password",
+    role: 0
+  )
+end
+
 Category.create(name: "政治")
 Category.create(name: "テクノロジー")
 Category.create(name: "金融")

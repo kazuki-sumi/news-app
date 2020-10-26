@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_020718) do
+ActiveRecord::Schema.define(version: 2020_10_24_090417) do
 
   create_table "article_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -102,6 +102,21 @@ ActiveRecord::Schema.define(version: 2020_09_22_020718) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_monthly_user_summaries_on_user_id"
+  end
+
+  create_table "operators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "email", limit: 191, null: false
+    t.string "password_digest", null: false
+    t.integer "role", limit: 2, default: 0, null: false
+    t.string "reset_password_token_digest"
+    t.datetime "reset_password_sent_at"
+    t.string "remember_digest"
+    t.datetime "remember_created_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_operators_on_deleted_at"
+    t.index ["email"], name: "index_operators_on_email", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
