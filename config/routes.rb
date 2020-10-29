@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/", to: "home#index"
     resources :users
+    resources :operators
     resources :password_resets, only: [:new, :create, :edit, :update]
     resources :articles
     resources :categories, except: [:show]

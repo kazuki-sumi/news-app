@@ -5,7 +5,7 @@
 
       = form_with scope: :password_reset, url: admin_password_resets_path, method: :post, local: true do |f|
         .form-group.mb-3
-          = f.label :email, User.human_attribute_name(:email)
+          = f.label :email, Operator.human_attribute_name(:email)
           .input-group.md-3
             .input-group-prepend
               span.input-group-text
