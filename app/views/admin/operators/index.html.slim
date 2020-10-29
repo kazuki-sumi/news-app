@@ -1,0 +1,22 @@
+.col-md-8.mb-5
+  .card
+    .card-header
+      h1.d-inline.mr-3 管理者一覧
+      button.btn.btn-secondary.align-text-bottom
+        = link_to "管理者登録", new_admin_operator_path, class: "file-link font-weight-bold"
+
+    .card-body.table-responsive
+      table.table-bordered.table
+        thead
+          tr
+            th = Operator.human_attribute_name(:email)
+            th = Operator.human_attribute_name(:role)
+            th アクション
+        tbody
+          - @operators.each do |operator|
+            tr
+              td = link_to operator.email, admin_operator_path(operator)
+              td = operator.role_text
+              td
+                = link_to "編集", edit_admin_operator_path(operator), class: 'btn btn-primary mr-3'
+                = link_to "削除", admin_operator_path(operator), method: :delete, data: { confirm: "ユーザ#{operator.email}を削除します。よろしいですか？" }, class: "btn btn-danger"

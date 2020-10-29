@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= javascript_pack_tag "admin", media: "all" %>
+    <%= stylesheet_pack_tag "admin" %>
+  </head>
+  <body>
+    <header class="navbar navbar-expand-md bg-dark">
+      <i class="navbar-brand cil-house text-white">News_app</i>
+    </header>
+    <div class="c-wrapper">
+      <div class="row">
+        <div class="c-body">
+          <main class="c-main col-md-5 mx-auto">
+            <% flash.each do |type, message| %>
+              <%= content_tag(:div, message, class: "alert alert-#{type}") %>
+            <% end %>
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
