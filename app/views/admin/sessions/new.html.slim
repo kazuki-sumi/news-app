@@ -5,14 +5,14 @@
 
       = form_with scope: :session, url: admin_login_path, method: :post, local: true do |f|
         .form-group
-          = f.label :email, User.human_attribute_name(:email)
+          = f.label :email, Operator.human_attribute_name(:email)
           .input-group.md-3
             .input-group-prepend
               span.input-group-text
                 i.cil-user.c-icon
             = f.text_field :email, class: "form-control"
         .form-gorup
-          = f.label :password, User.human_attribute_name(:password)
+          = f.label :password, Operator.human_attribute_name(:password)
           .input-group.md-3
             .input-group-prepend
               span.input-group-text

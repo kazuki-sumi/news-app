@@ -1,0 +1,18 @@
+.col-md-7.mb-5
+  .card
+    .card-header
+      h3 管理者詳細
+    .card-body.table-responsive
+      table.table-bordered.table
+        thead
+          tr
+            th = Operator.human_attribute_name(:email)
+            th = Operator.human_attribute_name(:role)
+            th アクション
+        tbody
+          tr
+            td = @operator.email
+            td = @operator.role_text
+            td
+              = link_to "編集", edit_admin_operator_path(@operator), class: "btn btn-primary mr-3"
+              = link_to "削除", admin_operator_path(@operator), method: :delete, data: { confirm: "ユーザ#{@operator.email}を削除します。よろしいですか？" }, class: "btn btn-danger"

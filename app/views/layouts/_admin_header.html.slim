@@ -4,7 +4,5 @@ header.navbar.navbar-expand-md.bg-dark
 
   ul.navbar-nav.ml-auto
     - if logged_in?
-      li.nav-item = link_to "#{current_user.email}さん", admin_user_path(current_user), class: "text-white nav-link"
+      li.nav-item = link_to "#{current_operator.email}さん", admin_operator_path(current_operator), class: "text-white nav-link"
       li.nav-item = link_to "ログアウト", admin_logout_path, method: :delete, class: "text-white nav-link"
-    - else
-      li.nav-item = link_to "ログイン", admin_login_path, class: "text-white nav-link"
