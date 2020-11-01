@@ -1,3 +1,4 @@
+# TODO 移管か削除
 # module SessionsHelper
 #   def log_in(user)
 #     session[:user_id] = user.id
