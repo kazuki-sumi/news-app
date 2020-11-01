@@ -5,7 +5,7 @@ header.navbar.navbar-expand-md.bg-dark.mb-5
 
   ul.navbar-nav.ml-auto
     li.nav-item = link_to "ランキング", ranking_pv_path, class: "text-white nav-link"
-    - if current_user&.admin?
+    - if current_operator&.admin?
       li.nav-item = link_to "管理画面に戻る", admin_articles_path, class: "text-white nav-link"
     - if logged_in?
       li.nav-item = link_to "ログアウト", admin_logout_path, method: :delete, class: "text-white nav-link"
