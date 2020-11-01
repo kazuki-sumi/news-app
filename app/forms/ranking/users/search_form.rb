@@ -1,5 +1,6 @@
 module Ranking
   module Users
+    # TODO オペレータに修正
     class SearchForm
       include ActiveModel::Model
       attr_accessor :term

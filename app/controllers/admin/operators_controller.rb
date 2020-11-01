@@ -1,5 +1,5 @@
 class Admin::OperatorsController < Admin::BaseController
-  before_action :authorize_admin_user
+  before_action :authorize_operator
 
   def index
     @operators = Operator.with_role(:admin)

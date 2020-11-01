@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_090417) do
+ActiveRecord::Schema.define(version: 2020_05_07_125045) do
 
   create_table "article_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_090417) do
   end
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "operator_id", null: false
     t.string "title", limit: 100, null: false
     t.text "content", null: false
     t.string "slug", null: false
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_10_24_090417) do
     t.integer "pv_count", default: 0, null: false
     t.index ["category_id"], name: "index_articles_on_category_id"
     t.index ["deleted_at"], name: "index_articles_on_deleted_at"
+    t.index ["operator_id"], name: "index_articles_on_operator_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
-    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -84,24 +84,24 @@ ActiveRecord::Schema.define(version: 2020_10_24_090417) do
   end
 
   create_table "daily_user_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "operator_id", null: false
     t.integer "pv_count", default: 0, null: false
     t.integer "comment_count", default: 0, null: false
     t.date "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_daily_user_summaries_on_user_id"
+    t.index ["operator_id"], name: "index_daily_user_summaries_on_operator_id"
   end
 
-  create_table "monthly_user_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "monthly_article_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "article_id", null: false
     t.integer "pv_count", default: 0, null: false
     t.integer "comment_count", default: 0, null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_monthly_user_summaries_on_user_id"
+    t.index ["article_id"], name: "index_monthly_article_summaries_on_article_id"
   end
 
   create_table "operators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -134,18 +134,18 @@ ActiveRecord::Schema.define(version: 2020_10_24_090417) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "weekly_user_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "weekly_article_summaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "article_id", null: false
     t.integer "pv_count", default: 0, null: false
     t.integer "comment_count", default: 0, null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_weekly_user_summaries_on_user_id"
+    t.index ["article_id"], name: "index_weekly_article_summaries_on_article_id"
   end
 
   add_foreign_key "articles", "categories"
-  add_foreign_key "articles", "users"
+  add_foreign_key "articles", "operators"
   add_foreign_key "comments", "articles"
 end

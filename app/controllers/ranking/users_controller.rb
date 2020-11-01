@@ -1,6 +1,7 @@
 module Ranking
   class UsersController < ApplicationController
     def index
+      # オペレータに修正
       @form = Ranking::Users::SearchForm.new(search_params)
       @users = @form.search
     end
