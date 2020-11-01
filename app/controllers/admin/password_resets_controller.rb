@@ -51,7 +51,7 @@ module Admin
 
     private
 
-    def user_params
+    def operator_params
       params.require(:operator).permit(:password, :password_confirmation)
     end
   end

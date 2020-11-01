@@ -14,7 +14,7 @@ module Admin
     end
 
     def create
-      @article = current_user.articles.build(article_params)
+      @article = current_operator.articles.build(article_params)
       if @article.save
         redirect_to admin_articles_path, notice: "記事を作成しました"
       else
@@ -23,11 +23,11 @@ module Admin
     end
 
     def edit
-      @article = current_user.articles.find(params[:id])
+      @article = current_operator.articles.find(params[:id])
     end
 
     def update
-      @article = current_user.articles.find(params[:id])
+      @article = current_operator.articles.find(params[:id])
       @article.attributes = article_params
       if @article.update_with_history!
         redirect_to admin_articles_path, notice: "記事を更新しました"
@@ -38,7 +38,7 @@ module Admin
 
     def destroy
       @article = Article.find(params[:id])
-      raise ActiveRecord::RecordNotFound unless @article.user_id == current_user.id
+      raise ActiveRecord::RecordNotFound unless @article.operator_id == current_operator.id
 
       if @article.destroy
         redirect_to admin_articles_path, notice: "記事を削除しました"

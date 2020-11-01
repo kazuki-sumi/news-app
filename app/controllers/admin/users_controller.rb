@@ -1,3 +1,4 @@
+# TODO 後々削除か移管
 class Admin::UsersController < Admin::BaseController
   before_action :authorize_admin_user
 
