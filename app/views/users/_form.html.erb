@@ -1,0 +1,42 @@
+<% if user.errors.any? %>
+  <ul class="error_explanation">
+    <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: user, url: url, local: true do |f| %>
+  <div class="card-body">
+    <div class="form-group">
+      <%= f.label :email, User.human_attribute_name(:email) %>
+      <div class="input-group md-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="cil-user c-icon"></i></span>
+        </div>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, Operator.human_attribute_name(:password) %>
+      <div class="input-group md-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="cil-lock-locked c-icon"></i></span>
+        </div>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, Operator.human_attribute_name(:password_confirmation) %>
+      <div class="input-group md-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="cil-lock-locked c-icon"></i></span>
+        </div>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= f.submit "登録する", class: "btn btn-primary" %>
+  </div>
+<% end %>

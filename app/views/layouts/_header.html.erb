@@ -1,0 +1,22 @@
+<header class="navbar navbar-expand-md bg-dark mb-5">
+  <%= link_to articles_path, class: "text-white" do %>
+    <i class="navbar-brand cil-house">News_app</i>
+  <% end %>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <%= link_to "ランキング", ranking_pv_path, class: "text-white nav-link" %>
+    </li>
+    <% if logged_in? %>
+      <li class="nav-item">
+        <%= link_to "ログアウト", logout_path, method: :delete, class: "text-white nav-link" %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to "新規登録", new_user_path, class: "text-white nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "ログイン", login_path, class: "text-white nav-link" %>
+      </li>
+    <% end %>
+  </ul>
+</header>

@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   root to: "home#index"
+  resources :users
   namespace :admin do
     get "/", to: "home#index"
     resources :users
