@@ -1,0 +1,37 @@
+<div class="login-form">
+  <div class="card p-4">
+    <div class="card-body">
+      <h3>ログインフォーム</h3>
+      <%= form_with url: login_path, method: :post, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :email, User.human_attribute_name(:email) %>
+          <div class="input-group md-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="cil-user c-icon"></i></span>
+            </div>
+            <%= f.text_field :email, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, User.human_attribute_name(:password) %>
+          <div class="input-group md-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="cil-lock-locked c-icon"></i></span>
+            </div>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+        </div>
+        <div class="py-2">
+          <%= link_to "パスワードを忘れたかた", new_admin_password_reset_path %>
+        </div>
+        <div class="form_check pb-3">
+          <%= f.label :remember_me, class: "form-check-label" do %>
+            <%= f.check_box :remember_me %>
+            | ログイン状態を保持する
+          <% end %>
+        </div>
+        <%= f.submit "ログインする", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
