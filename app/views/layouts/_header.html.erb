@@ -6,7 +6,7 @@
     <li class="nav-item">
       <%= link_to "ランキング", ranking_pv_path, class: "text-white nav-link" %>
     </li>
-    <% if logged_in? %>
+    <% if user_logged_in? %>
       <li class="nav-item">
         <%= link_to "ログアウト", logout_path, method: :delete, class: "text-white nav-link" %>
       </li>
