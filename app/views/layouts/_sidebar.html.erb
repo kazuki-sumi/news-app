@@ -1,0 +1,49 @@
+<div class="c-sidebar bg-dark c-sidebar-show sticky-top h-100">
+  <ul class="c-sidebar-nav">
+    <li class="c-sidebar-nav-title">
+      ダッシュボード
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to new_admin_article_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-pencil">
+          新規投稿
+        </i>
+      <% end %>
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to admin_articles_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-notes">
+          記事一覧(管理者用)
+        </i>
+      <% end %>
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to articles_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-newspaper">
+          公開記事一覧
+        </i>
+      <% end %>
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to admin_categories_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-puzzle">
+          カテゴリー
+        </i>
+      <% end %>
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to admin_article_files_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-satelite">
+          メディアライブラリ
+        </i>
+      <% end %>
+    </li>
+    <li class="c-sidebar-nav-item nav-dropdown">
+      <%= link_to admin_operators_path, class: "text-white c-sidebar-nav-link nav-dropdown-toggle" do %>
+        <i class="c-sidebar-nav-icon cil-people">
+          ユーザー
+        </i>
+      <% end %>
+    </li>
+  </ul>
+</div>
