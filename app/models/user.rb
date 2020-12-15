@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :email, presence: true, length: { maximum: 191 }, uniqueness: true
-  has_many :articles, dependent: :destroy
   has_many :daily_user_summaries, dependent: :destroy
   has_many :weekly_user_summaries, dependent: :destroy
   has_many :monthly_user_summaries, dependent: :destroy

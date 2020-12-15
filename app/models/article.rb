@@ -9,7 +9,7 @@ class Article < ApplicationRecord
   has_many :weekly_article_summaries, dependent: :destroy
   has_many :monthly_article_summaries, dependent: :destroy
   belongs_to :category, optional: true
-  belongs_to :user
+  belongs_to :operator
   paginates_per 10
   acts_as_paranoid
   enumerize :status, in: { draft: 0, release: 1 }, default: :draft, predicates: true, scope: true

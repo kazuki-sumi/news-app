@@ -51,7 +51,7 @@ Category.create(name: "プログラミング")
 
 20.times do |t|
   Article.create(
-    user_id: rand(1..10),
+    operator_id: rand(1..10),
     category_id: rand(1..5),
     title: "テストタイトル#{t}",
     content: "テスト本文",
@@ -65,7 +65,7 @@ end
 
 20.times do |t|
   Article.create(
-    user_id: rand(1..10),
+    operator_id: rand(1..10),
     category_id: rand(1..5),
     title: "プログラムタイトル#{t}",
     content: "プログラム本文",
@@ -80,7 +80,7 @@ end
 
 20.times do |t|
   Article.create(
-    user_id: rand(1..10),
+    operator_id: rand(1..10),
     category_id: rand(1..5),
     title: "サンプルタイトル#{t}",
     content: "サンプル本文",
