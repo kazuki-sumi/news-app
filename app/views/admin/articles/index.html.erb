@@ -1,0 +1,65 @@
+<div class="col-md-7">
+  <h1>記事一覧(管理者用)</h1>
+</div>
+<div class="col-md-7">
+  <div class="card">
+    <%= form_with model: @form, url: admin_articles_path, method: :get, local: true do |f| %>
+      <div class="search_box">
+        <div class="card-body">
+          <div class="form-group">
+            <%= f.label :title, "記事のタイトル" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :status, "記事の状態" %>
+            <%= f.select :status, {"下書き": 0, "公開": 1}, { include_blank: "選択してください" }, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :category_id, "カテゴリ" %>
+            <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :released_at, "公開日" %>
+            <%= f.date_select :min_released_at, include_blank: "選択してください" %>
+            〜 
+            <%= f.date_select :max_released_at, include_blank: "選択してください" %>
+          </div>
+          <div class="card-footer">
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="news-container col-md-7 pb-5">
+  <div class="row row-cols-1 row-cols-md-2">
+    <% @articles.each do |article| %>
+      <div class="col mb-3">
+        <div class="card h-100">
+          <%= link_to admin_article_path(article), class: "news-link card-img-top" do %>
+            <div class="news-image">
+              <%= image_tag(article.image_url.to_s) %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title font-weight-bold text-body">
+                <%= article.title %>
+              </h4>
+              <% if article.released_at? %>
+                <p class="text-secondary">
+                  <%= "公開日：#{ l article.released_at, format: :date }" %>
+                </p>
+              <% else %>
+                <p class="text-secondary">
+                  公開日未定
+                </p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <%= paginate @articles %>
+</div>
