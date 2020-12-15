@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NewsApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render partial: "layouts/header" %>
+    <div class="c-wrapper">
+      <div class="c-body">
+        <main class="c-main">
+          <% flash.each do |type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{type} col-md-8") %>
+          <% end %>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
