@@ -1,0 +1,34 @@
+<div class="col-md-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>アップロードしたファイルを編集する</h3>
+    </div>
+    <% if @article_file.errors.any? %>
+      <ul id="error_explanation">
+        <% @article_file.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= form_with model: @article_file, url: admin_article_file_path(@article_file), local: true do |f| %>
+      <div class="card-body">
+        <% if @article_file.persisted? && @article_file.file_url? %>
+          <div class="file mb-3">
+            <%= image_tag(@article_file.file_url.to_s, :size => "200x200", class: "d-block mx-auto") %>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :name, "ファイル名" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :slug, "URLに表示する文字列" %>
+          <%= f.text_field :slug, class: "form-control" %>
+        </div>
+      </div>
+      <div class="card-footer">
+        <%= f.submit "作成", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

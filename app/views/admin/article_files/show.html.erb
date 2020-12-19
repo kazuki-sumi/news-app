@@ -1,0 +1,40 @@
+<div class="upload-file">
+  <div class="file-content mb-5">
+    <% if image?(@article_file) %>
+      <div class="file">
+        <%= image_tag(@article_file.file_url.url, :size => "500x400") %>
+      </div>
+    <% elsif @article_file.file_type.include?("pdf") %>
+      <p>pdfファイル</p>
+    <% elsif @article_file.file_type.include?("mp3") %>
+      <p>音声ファイル</p>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <div class="file-info card">
+      <div class="card-body">
+        <li class="list-unstyled">
+          <%= "ファイル名：#{@article_file.name}" %>
+        </li>
+        <li class="list-unstyled">
+          <%= "メディア名：#{@article_file.file_url.identifier}" %>
+        </li>
+        <li class="list-unstyled">
+          <%= "ファイルタイプ：#{@article_file.file_type}" %>
+        </li>
+        <li class="list-unstyled">
+          <%= "ファイルサイズ：#{@article_file.file_size/1000.to_f} KB" %>
+        </li>
+        <% if image?(@article_file) %>
+          <li class="list-unstyled">
+            <%= "サイズ(縦 × 横)：#{@article_file.data["height"]} × #{@article_file.data["width"]}" %>
+          </li>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <%= link_to "ファイルの編集", edit_admin_article_file_path(@article_file), class: "btn btn-primary mr-3" %>
+        <%= link_to "ファイルを削除", admin_article_file_path(@article_file), method: :delete, data: { confirm: "このファイルを削除します。よろしいですか？" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
