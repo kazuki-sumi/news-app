@@ -1,0 +1,31 @@
+<div class="col-md-7 mb-5">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="d-inline mr-3">カテゴリー一覧</h1>
+      <button class="btn btn-secondary align-text-bottom">
+        <%= link_to "新規作成", new_admin_category_path, class: "file-link font-weight-bold" %>
+      </button>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table-bordered table">
+        <thead>
+          <tr>
+            <th>カテゴリー名</th>
+            <th>アクション</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.name %></td>
+              <td>
+                <%= link_to "編集", edit_admin_category_path(category), class: 'btn btn-primary mr-3' %>
+                <%= link_to "削除", admin_category_path(category), method: :delete, data: { confirm: "カテゴリー#{category.name}を削除します。よろしいですか？" }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
