@@ -31,7 +31,8 @@
         </div>
         <div class="form_check pb-3">
           <%= f.label :remember_me, class: "form-check-label" do %>
-            <%= f.check_box :remember_me, "ログイン状態を保持する" %>
+            <%= f.check_box :remember_me %>
+            ログイン状態を保持する
           <% end %>
         </div>
         <%= f.submit "ログインする", class: "btn btn-primary" %>
