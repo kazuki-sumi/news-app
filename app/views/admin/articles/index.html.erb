@@ -16,7 +16,7 @@
           </div>
           <div class="form-group">
             <%= f.label :category_id, "カテゴリ" %>
-            <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, class: "form-control" %>
+            <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control js-category", multiple: true } %>
           </div>
           <div class="form-group">
             <%= f.label :released_at, "公開日" %>
