@@ -9,7 +9,7 @@ require("channels")
 
 require("@coreui/coreui")
 
-$(document).ready(function() {
+$(function() {
   $('.js-category').select2({
     width: '100%'
   });
